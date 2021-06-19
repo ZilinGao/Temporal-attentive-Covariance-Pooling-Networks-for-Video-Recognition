@@ -38,13 +38,31 @@ generalization ability.
 
   |Method | Backbone       | frames | 1 crop Acc (%) | 30 views Acc (%) | Model GoogleDrive | Model BaiduDisk | 
   |:-----:|:------:|:------:|:--------------------------:|:-------------:|:---------------:|:---:|
-  |TCPNet |TSN R50  |   8f   |           72.4/90.4        |         75.3/91.8            | TODO | TODO | 
-  |TCPNet |TEA R50  |   8f   |        73.9/91.6        |         76.8/92.9            | TODO |TODO | 
-  |TCPNet |TSN R152  |   8f   |          75.7/92.2        |         78.3/93.7            |  TODO | TODO | 
-  |TCPNet |TSN R50  |   16f   |          73.9/91.2        |         75.8/92.1           | TODO |TODO | 
-  |TCPNet |TEA R50  |   16f   |           75.3/92.2        |             77.2/93.1            | TODO |TODO | 
-  |TCPNet |TSN R152  |   16f   |          77.2/93.1        |         79.3/94.0            |   TODO |TODO | 
-
+  |TCPNet |TSN R50  |   8f   |           72.4/90.4  |         75.3/91.8          | [link][TCP_TSN8f_google] |[link][TCP_TSN8f_baidu] extract code:  8bqf| 
+  |TCPNet |TEA R50  |   8f   |        73.9/91.6     |         76.8/92.9            | [link][TCP_TEA8f_google] |[link][TCP_TEA8f_baidu] extrace code: qn1k| 
+  |TCPNet |TSN R152  |   8f   |          75.7/92.2  |         78.3/93.7          | [link][TCP_R1528f_google] |[link][TCP_R1528f_baidu] extract code: f6e5| 
+  |TCPNet |TSN R50  |   16f   |          73.9/91.2  |         75.8/92.1          | [link][TCP_TSN16f_google] |[link][TCP_TSN16f_baidu] extract code: wjop| 
+  |TCPNet |TEA R50  |   16f   |           75.3/92.2 |             77.2/93.1      | [link][TCP_TEA16f_google] |[link][TCP_TEA16f_baidu] extract code: budr| 
+  |TCPNet |TSN R152  |   16f   |          77.2/93.1 |         79.3/94.0        | [link][TCP_R15216f_google] |[link][TCP_R15216f_baidu] extract code: 89rs|
+   
+   
+   [TCP_TSN8f_google]: https://drive.google.com/file/d/1p05CaIv50Y2hzELFD4tXYYCZXizjkKAr/view?usp=sharing
+   [TCP_TSN16f_google]: https://drive.google.com/file/d/1tCg-1JiM8l0_lC_YCyBqeVY_BohiQ3PS/view?usp=sharing
+   
+   [TCP_TSN8f_baidu]: https://pan.baidu.com/s/1mXx3c0PWMB0rRerDK9wkBg
+   [TCP_TSN16f_baidu]: https://pan.baidu.com/s/1ocj0-3V0HWbKwZm0nCHonQ
+   
+   [TCP_TEA8f_google]: https://drive.google.com/file/d/1YnYE9Jcrv7MXE-Uom0XqML-drSJ3kn1y/view?usp=sharing
+   [TCP_TEA16f_google]: https://drive.google.com/file/d/1_NNRE1DEeghX9MvRi0-w3abmEE2dmxny/view?usp=sharing
+   
+   [TCP_TEA8f_baidu]: https://pan.baidu.com/s/1grKR6UWLVpQBrNHoaFNlJQ
+   [TCP_TEA16f_baidu]: https://pan.baidu.com/s/1YfjpwcWWzxFYLS22f2OZ5Q
+   
+   [TCP_R1528f_google]: https://drive.google.com/file/d/108pRkpSOZ8uyaej_PYlkn2lfuOMWSl39/view?usp=sharing
+   [TCP_R15216f_google]: https://drive.google.com/file/d/15A1OhUXE_5YRH_TS5H914_BHfsZgrMNd/view?usp=sharing
+   [TCP_R1528f_baidu]: https://pan.baidu.com/s/10Or9C6R1GM6maRe6YL618w
+   [TCP_R15216f_baidu]: https://pan.baidu.com/s/1sNdlxl9WBQN0jdpOHsOjWA
+   
 #### Mini-Kinetics-200  
 
 
@@ -81,12 +99,17 @@ matplotlib
 
   ## Acknowledgement
 
-Our code is  mainly based on [TSM][1] using [pytorch][5] toolbox and adopt some parts from [iSQRT][2], [TEA][3] and [Non-local][4], [S3D][S3D]. Thanks for their work!
+- We thank [TSM][1] for providing the base basic tool box.
+- We also adopt some parts from [iSQRT][2], [TEA][3] and [Non-local][4] and [S3D][S3D]. 
+- We would like to thank Facebook for developing pytorch toolbox.
+
+Thanks for their work!
   
   [1]: https://github.com/mit-han-lab/temporal-shift-module
   [2]: https://github.com/jiangtaoxie/fast-MPN-COV
   [3]: https://github.com/Phoenix1327/tea-action-recognition
   [4]: https://github.com/facebookresearch/SlowFast
   [5]: https://pytorch.org
+  [S3D]: https://github.com/s9xie/Mini-Kinetics-200
   
   
