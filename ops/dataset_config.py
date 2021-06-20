@@ -1,11 +1,11 @@
-# Code for "TSM: Temporal Shift Module for Efficient Video Understanding"
-# arXiv:1811.08383
-# Ji Lin*, Chuang Gan, Song Han
-# {jilin, songhan}@mit.edu, ganchuang@csail.mit.edu
+'''
+Implementation of 'Temporal-attentive Covariance Pooling Networks for Action Recognition'
+Authors: Zilin Gao, Qilong Wang, Bingbing Zhang, Qinghua Hu and Peihua Li.
+'''
 
 import os
 
-ROOT_DATASET = './'  # '/data/jilin/'
+ROOT_DATASET = './'
 
 
 def return_ucf101(modality):
@@ -45,10 +45,7 @@ def return_hmdb51(modality):
 def return_something(modality):
     filename_categories = '../caption/STH-V1/category.txt'
     if modality == 'RGB':
-        # root_data = '/media/cv-01/SSD250G/20bn-something-something-v1'
         root_data = '/SSD/20bn-something-something-v1'
-        #root_data = '/nvme/20bn-something-something-v1'
-        # root_data = '/media/icy/zbb/sth-v1/20bn-something-something-v1'
         filename_imglist_train = '../caption/STH-V1/train_videofolder.txt'
         filename_imglist_val = '../caption/STH-V1/val_videofolder.txt'
         prefix = '{:05d}.jpg'
@@ -97,10 +94,6 @@ def return_kinetics(modality):
         root_data = '/media/cv-01/gzl_500G/Mini_K200/train_val'
         filename_imglist_train = '/media/cv-01/gzl_500G/Mini_K200/K200_caption/train_K200.txt'
         filename_imglist_val = '/media/cv-01/gzl_500G/Mini_K200/K200_caption/val_K200_mp4.txt'
-#        filename_imglist_val = '/SSD1T/Mini_K200/K200_caption/val_K200_mp4.txt'
-#
-        #filename_imglist_val = '/SSD/K400_256_frame/K200_caption/val_K200_mp4.txt'
-        #filename_imglist_val = 'caption/K400/val_videofolder_K400.txt'
         prefix = 'img_{:05d}.jpg'
     else:
         raise NotImplementedError('no such modality:' + modality)
@@ -123,7 +116,7 @@ def return_mini_kinetics_200(modality):
 
 def return_diving48(modality):
     filename_categories = 48
-    root_data = '/media/icyzhang/SSD/dataset/Diving48/frames'
+    root_data = 'path/to/Diving48'
     filename_imglist_train = 'Diving48/train_videofolder.txt'
     filename_imglist_val = 'Diving48/val_videofolder.txt'
     prefix = '{:05d}.jpg'

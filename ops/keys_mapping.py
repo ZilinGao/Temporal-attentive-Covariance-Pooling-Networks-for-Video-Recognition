@@ -1,5 +1,10 @@
 
+'''
+Implementation of 'Temporal-attentive Covariance Pooling Networks for Action Recognition'
+Authors: Zilin Gao, Qilong Wang, Bingbing Zhang, Qinghua Hu and Peihua Li.
 
+This file is modified from non-local code.
+'''
 
 
 def adaptive_mapping_old_style_keys(checkpoint, k_new, args):
@@ -26,21 +31,6 @@ def keys_mapping_old_resnet(checkpoint, k_new, replace_dict=[], k_old=None):
     for i in k_old :
         if 'iSQRT' in i:
             i_new = i.replace('layer4.iSQRT.', 'TCP.')
-            # if i_new in k_new :
-            #     replace_dict.append((i, i_new)) # (k_old, k_new)
-            # elif i_new.replace('att_module', 'TCP_att.TCA') in k_new:
-            #     i_new = i_new.replace('att_module', 'TCP_att.TCA')
-            # elif i_new.replace('att_module.sp_att', 'TCP_att.TSA') in k_new:
-            #     i_new = i_new.replace('att_module', 'TCP_att.TSA')
-            # elif i_new.replace('att_module', 'TCP_att') in k_new:
-            #     i_new = i_new.replace('att_module', 'TCP_att')
-            # else :
-            #     assert 0, 'invalid TCP layers' + i
-            #
-            # i_candidates = [i_new.replace('att_module', 'TCP_att.TCA'),
-            #                 i_new.replace('att_module.sp_att', 'TCP_att.TSA'),
-            #                 i_new.replace('att_module', 'TCP_att'),
-            #                 i_new]
 
             i_candidates = [i_new.replace('att_module.conv_1', 'TCP_att.TCA.g1'),
                             i_new.replace('att_module.conv_2', 'TCP_att.TCA.g2'),
@@ -62,13 +52,8 @@ def keys_mapping_old_resnet(checkpoint, k_new, replace_dict=[], k_old=None):
             raise KeyError('invalid resume layer ' + i)
 
     for k, k_new_i in replace_dict:
-        # try :
-        #     v = checkpoint['state_dict'].pop(k)
-        #     checkpoint['state_dict'][k_new_i] = v
             v = checkpoint.pop(k)
             checkpoint[k_new_i] = v
-        # except :
-        #     a = 1
 
     return checkpoint
 
@@ -77,9 +62,9 @@ def keys_mapping_old_resnet(checkpoint, k_new, replace_dict=[], k_old=None):
 
 
 def keys_mapping_old_tea(checkpoint, k_new, replace_dict=[]):
-    # if k_old is None:
+
     k_old = checkpoint.keys()
-    # replace_dict = []
+
     for i in k_old :
         if 'iSQRT' in i:
             i_new = i.replace('iSQRT.', 'TCP.')
@@ -109,13 +94,8 @@ def keys_mapping_old_tea(checkpoint, k_new, replace_dict=[]):
             raise KeyError('invalid resume layer ' + i)
 
     for k, k_new_i in replace_dict:
-        # try :
-        #     v = checkpoint['state_dict'].pop(k)
-        #     checkpoint['state_dict'][k_new_i] = v
             v = checkpoint.pop(k)
             checkpoint[k_new_i] = v
-        # except :
-        #     a = 1
 
     return checkpoint
 

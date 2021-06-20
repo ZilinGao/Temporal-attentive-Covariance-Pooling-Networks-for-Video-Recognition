@@ -91,9 +91,9 @@ def main():
                                 momentum=args.momentum,
                                 weight_decay=args.weight_decay)
 
-    if args.TCP and args.tune_TCP_from:
-        print(("=> loading pretrained GCP model from '{}'".format(args.tune_TCP_from)))
-        sd = torch.load(args.tune_TCP_from)
+    if args.TCP and args.load_GCP_from:
+        print(("=> loading pretrained GCP model from '{}'".format(args.load_GCP_from)))
+        sd = torch.load(args.load_GCP_from)
         sd = sd['state_dict']
         model_dict = model.state_dict()
         sd = adaptive_mapping_pretrained_keys(sd, model_dict, args)
@@ -125,21 +125,40 @@ def main():
         model_dict.update(sd)
         model.load_state_dict(model_dict)
 
-    if args.resume:
+
+    if  (not args.keys_old) and [ii for ii in model.state_dict().keys() if 'iSQRT' in ii]:
+        args.keys_old = True
+
+    if args.resume or args.load_TCP_from: #load trained TCP model
+        load_path = args.resume if args.resume else args.load_TCP_from
         if args.temporal_pool:  # early temporal pool so that we can load the state_dict
             make_temporal_pool(model.module.base_model, args.num_segments)
-        assert os.path.isfile(args.resume), "=> no checkpoint found at %s"%args.resume
-        print(("=> loading checkpoint '{}'".format(args.resume)))
+        assert os.path.isfile(load_path), "=> no checkpoint found at %s"%load_path
+        print(("=> loading checkpoint '{}'".format(load_path)))
 
-        checkpoint = torch.load(args.resume)
-        args.start_epoch = checkpoint['epoch']
-        best_prec1 = checkpoint['best_prec1']
+        checkpoint = torch.load(load_path)
+        if args.resume :
+            args.start_epoch = checkpoint['epoch']
+            best_prec1 = checkpoint['best_prec1']
 
-        if not args.keys_old : #not load optimizer for old keys model
-            optimizer.load_state_dict(checkpoint['optimizer'])
+        if not args.keys_old :
+            if args.resume: #not load optimizer for old keys model
+                optimizer.load_state_dict(checkpoint['optimizer'])
         else :#mapping old style keys to the new
-            checkpoint['state_dict'] = adaptive_mapping_old_style_keys(checkpoint['state_dict'], model.state_dict().keys(), args)
-        model.load_state_dict(checkpoint['state_dict'])
+            checkpoint['state_dict'] = adaptive_mapping_old_style_keys(
+                checkpoint['state_dict'], model.state_dict().keys(), args)
+
+        if args.load_TCP_from:
+            print("==> new dataset, remove pretrained fc weights")
+            sd = checkpoint['state_dict']
+            sd = {k: v for k, v in sd.items() if 'fc' not in k}
+            if args.modality == 'Flow' and 'Flow' not in args.tune_from:
+                sd = {k: v for k, v in sd.items() if 'conv1.weight' not in k}
+            model_dict = model.state_dict()
+            model_dict.update(sd)
+            model.load_state_dict(model_dict)
+        else:
+            model.load_state_dict(checkpoint['state_dict'])
 
         print(("=> loaded checkpoint evaluate:'{}' (epoch {})"
                .format(args.evaluate, checkpoint['epoch'])))
@@ -229,7 +248,8 @@ def main():
         os.mkdir('results')
     if not os.path.exists(args.store_name) :
         os.mkdir(args.store_name)
-    assert (not args.resume) or os.path.exists(os.path.join(args.store_name,'stats.mat')), 'not found stats.mat when resuming'
+    assert (not args.resume) or os.path.exists(os.path.join(args.store_name,'stats.mat')), \
+        'not found stats.mat when resuming'
 
 
     stats_ = stats(args.store_name, args.start_epoch)
@@ -408,12 +428,6 @@ def validate(val_loader, model, criterion, epoch, log=None, tf_writer=None):
 
     return losses.avg, top1.avg, top5.avg
 
-
-# def save_checkpoint(state, is_best):
-#     filename = '%s/%s/ckpt.pth.tar' % (args.root_model, args.store_name)
-#     torch.save(state, filename)
-#     if is_best:
-#         shutil.copyfile(filename, filename.replace('pth.tar', 'best.pth.tar'))
 
 def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
     torch.save(state, os.path.join(filename[0]))

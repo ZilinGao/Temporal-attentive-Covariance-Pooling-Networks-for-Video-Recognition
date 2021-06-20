@@ -40,16 +40,10 @@ class TSN(nn.Module):
         self.base_model_name = base_model
         self.fc_lr5 = fc_lr5
         self.temporal_pool = temporal_pool
-        # self.convgru = convgru
-        # self.deformconvgru = deformconvgru
-        # self.ctconvgru = ctconvgru
-        # self.ctdeformconvgru = ctdeformconvgru
-
 
         self.TCP = TCP
         self.TCP_dim = TCP_dim
         self.TCP_level = TCP_level
-        # self.stage = stage
         self.pretrained_dim = pretrained_dim
         self.TCP_ch = TCP_ch
         self.TCP_sp = TCP_sp
@@ -135,7 +129,7 @@ class TSN(nn.Module):
             self.repr_dim = 2048
 
 
-        if 'resnet152' in base_model : #ResNet-152 pretrained on ImageNet-11K
+        if 'resnet152' in base_model : #Preact ResNet-152 pretrained on ImageNet-11K + Imagenet-1K
             import ops.torchvision.preact_resnet as rsn
             self.base_model = getattr(rsn, base_model)(True,
                                                        TCP=TCP_module)  # gzl 12.01
@@ -177,35 +171,20 @@ class TSN(nn.Module):
                 self.input_std = self.input_std + [np.mean(self.input_std) * 2] * 3 * self.new_length
 
         elif 'tea' in base_model:
-            # if self.TCP :
-            #     TCP_module = TCP(
-            #             dim_in=2048, dim_out=self.TCP_dim,
-            #             num_segments=self.num_segments,
-            #             ch_flag=self.TCP_ch, sp_flag=self.TCP_sp,
-            #             conv_1d_flag=self.TCP_1d)
-            #     self.repr_dim = int(self.TCP_dim * (self.TCP_dim + 1) / 2.)
-            # else :
-            #     TCP_module = None
-            #     self.repr_dim = 2048
 
             if self.num_segments == 8:
                 from ops.torchvision.tea50_8f import tea50_8f
                 self.base_model = tea50_8f(
                     TCP_module=TCP_module,
-                    # segment=self.num_segments
                 )
             if self.num_segments == 16:
                 from ops.torchvision.tea50_16f import tea50_16f
-                # self.base_model = tea50_16f(pretrained=True)
                 self.base_model = tea50_16f(
                     TCP_module=TCP_module,
-                    # segment=self.num_segments
                 )
 
             self.input_size = 224
             self.base_model.last_layer_name = 'fc'
-            # if self.SOP:
-            #     self.base_model.avgpool = nn.AdaptiveAvgPool2d(1)
 
             if self.modality == 'RGB':
                 self.input_mean = [0.485, 0.456, 0.406]
@@ -376,11 +355,11 @@ class TSN(nn.Module):
         if self.reshape:
             if self.is_shift and self.temporal_pool:
                 base_out = base_out.view((-1, self.num_segments // 2) + base_out.size()[1:])
-            elif self.TCP and self.TCP_level == 'video': #gzl 12.23 11.27
+            elif self.TCP and self.TCP_level == 'video':
                 base_out = base_out
             else :
                 base_out = base_out.view((-1, self.num_segments) + base_out.size()[1:])
-            if (not self.TCP) or (self.TCP and self.TCP_level=='frame'): #gzl 12.23 11.27
+            if (not self.TCP) or (self.TCP and self.TCP_level=='frame'):
                 output = self.consensus(base_out)
                 return output.squeeze(1)
             else :
@@ -477,8 +456,6 @@ class TSN(nn.Module):
     @property
     def scale_size(self):
         return self.input_size * 256 // 224
-
-        # return self.input_size * 128 // 112 #GZL 11.25
 
     def get_augmentation(self, flip=True):
         if self.modality == 'RGB':
