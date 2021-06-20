@@ -29,21 +29,20 @@ generalization ability.
   }
   ```
 
-  
 
   ## Model Zoom
   
 
 #### Kinetics-400
 
-  |Method | Backbone       | frames | 1 crop Acc (%) | 30 views Acc (%) | Model GoogleDrive | Model BaiduDisk | 
-  |:-----:|:------:|:------:|:--------------------------:|:-------------:|:---------------:|:---:|
-  |TCPNet |TSN R50  |   8f   |           72.4/90.4  |         75.3/91.8          | [link][TCP_TSN8f_google] |[link][TCP_TSN8f_baidu] extract code:  8bqf| 
-  |TCPNet |TEA R50  |   8f   |        73.9/91.6     |         76.8/92.9            | [link][TCP_TEA8f_google] |[link][TCP_TEA8f_baidu] extrace code: qn1k| 
-  |TCPNet |TSN R152  |   8f   |          75.7/92.2  |         78.3/93.7          | [link][TCP_R1528f_google] |[link][TCP_R1528f_baidu] extract code: f6e5| 
-  |TCPNet |TSN R50  |   16f   |          73.9/91.2  |         75.8/92.1          | [link][TCP_TSN16f_google] |[link][TCP_TSN16f_baidu] extract code: wjop| 
-  |TCPNet |TEA R50  |   16f   |           75.3/92.2 |             77.2/93.1      | [link][TCP_TEA16f_google] |[link][TCP_TEA16f_baidu] extract code: budr| 
-  |TCPNet |TSN R152  |   16f   |          77.2/93.1 |         79.3/94.0        | [link][TCP_R15216f_google] |[link][TCP_R15216f_baidu] extract code: 89rs|
+  |Method | Backbone|frames|1 crop Acc (%)| 30 views Acc (%) | Model | Pretrained Model |  test log |
+  |:-----:|:------:|:--:|:--------:|:--------:|:---------------------------------------:|:-----------------------------:|:---------------------:|
+  |TCPNet |TSN R50 | 8f| 72.4/90.4 | 75.3/91.8| [K400_TCP_TSN_R50_8f][TCP_TSN8f_google] |[Img1K_R50_GCP][Img1K_R50_GCP] |  [log][TCP_R50_8f_log] |
+  |TCPNet |TEA R50 | 8f| 73.9/91.6 | 76.8/92.9| [K400_TCP_TEA_R50_8f][TCP_TEA8f_google]|[Img1K_Res2Net50_GCP][Img1K_Res2Net50_GCP]|[log][TCP_TEA_R50_8f_log] |
+  |TCPNet |TSN R152| 8f| 75.7/92.2 | 78.3/93.7| [K400_TCP_TSN_R152_8f][TCP_R1528f_google] |[Img11K_1K_R152_GCP][Img11K_1K_R152_GCP]|[log][TCP_R152_8f_log] |
+  |TCPNet |TSN R50 |16f| 73.9/91.2 | 75.8/92.1| [K400_TCP_TSN_R50_16f][TCP_TSN16f_google] |[Img1K_R50_GCP][Img1K_R50_GCP]| [log][TCP_R50_16f_log] |
+  |TCPNet |TEA R50 |16f| 75.3/92.2 | 77.2/93.1| [K400_TCP_TEA_R50_16f][TCP_TEA16f_google] |[Img1K_Res2Net50_GCP][Img1K_Res2Net50_GCP]|[log][TCP_TEA_R50_16f_log] |
+  |TCPNet |TSN R152|16f| 77.2/93.1 | 79.3/94.0| [K400_TCP_TSN_R152_16f][TCP_R15216f_google] |[Img11K_1K_R152_GCP][Img11K_1K_R152_GCP]|[TODO][TCP_R152_16f_log] |
    
    
    [TCP_TSN8f_google]: https://drive.google.com/file/d/1p05CaIv50Y2hzELFD4tXYYCZXizjkKAr/view?usp=sharing
@@ -63,27 +62,44 @@ generalization ability.
    [TCP_R1528f_baidu]: https://pan.baidu.com/s/10Or9C6R1GM6maRe6YL618w
    [TCP_R15216f_baidu]: https://pan.baidu.com/s/1sNdlxl9WBQN0jdpOHsOjWA
    
+   [Img1K_R50_GCP]: https://drive.google.com/file/d/119Mu7xDm8mpBZhKje6hIV_ER6YXED5hv/view?usp=sharing
+   [Img1K_Res2Net50_GCP]: https://drive.google.com/file/d/1SLNz3dmWVBVsdp9CIaWFZXcAgtG5DvTH/view?usp=sharing
+   [Img11K_1K_R152_GCP]: https://drive.google.com/file/d/1FCx48L7KA9N4sh5ouH6Xp3GAQgEXE4so/view?usp=sharing
+   
+   [TCP_R50_8f_log]: https://drive.google.com/file/d/1oo0qoX184cGCu9flSd2r8hfy_HQJe4Rn/view?usp=sharing
+   [TCP_TEA_R50_8f_log]: https://drive.google.com/file/d/1bQSs2MnuXEgVa-Yi1QYEThHUM7uv510G/view?usp=sharing
+   [TCP_R152_8f_log]: https://drive.google.com/file/d/1cRYdgqP1OzrmwFJJAFnG7-TB2l6WuATz/view?usp=sharing
+   [TCP_R50_16f_log]: https://drive.google.com/file/d/1hBy8PjOj5qHocGHvNES2nntJS0UpLryo/view?usp=sharing
+   [TCP_TEA_R50_16f_log]: https://drive.google.com/file/d/1LIs77JXdsQGAhc_v4MleOws0o533pHwh/view?usp=sharing
+   [TCP_R152_16f_log]: https://drive.google.com/file/d/1cRYdgqP1OzrmwFJJAFnG7-TB2l6WuATz/view?usp=sharing
+
+     
+   
 #### Mini-Kinetics-200  
 
 
-  |Method | Backbone       | frames | 1 crop Acc (%) | 30 views Acc (%) | Model GoogleDrive | Model BaiduDisk | 
-  |:-----:|:------:|:------:|:--------------------------:|:-------------:|:---------------:|:---:|
-  |TCPNet |TSN R50  |   8f   |           78.7        |        80.7            | TODO | TODO | 
+  |Method | Backbone|frames|1 crop Acc (%)| 30 views Acc (%) | Model | Pretrained Model |
+  |:-----:|:------:|:--:|:--------:|:--------:|:---------------------------------------:|:-----------------------------:
+  |TCPNet |TSN R50  |   8f   |    78.7   |        80.7       | [K200_TCP_TSN_8f][K200_TCP] | [K400_TCP_TSN_R50_8f][TCP_TSN8f_google]| 
 
+
+[K200_TCP]: https://drive.google.com/file/d/1bbcBgfsxbzz6TdMm02RzrSqF0QyYbrLU/view?usp=sharing
 
   ## Environments
   
-  pytorch 1.0+
+  pytorch v1.0+(for TCP_TSN); v1.0~1.4(for TCP+TEA)
   
   ffmpeg
 
-TensorboardX
+tensorboard `pip install tensorboard`
 
-tqdm
+tqdm `pip install tqdm`
 
-scikit-learn
+scikit-learn `conda install scikit-learn`
   
-matplotlib
+matplotlib `conda install -c conda-forge matplotlib`
+
+fvcore `pip install 'git+https://github.com/facebookresearch/fvcore'`
 
   ## Dataset Preparation
   
@@ -92,15 +108,31 @@ matplotlib
   ## StartUp
   1. download the pretrained model and put it in `pretrained_model/`
   2. execute the training script file 
-      e.g.: `sh script/k400/train_tcp_tsn_r50.sh`
+      e.g.: `sh script/K400/train_TCP_TSN_8f_R50.sh`
  3. execute the inference script file 
-      e.g.: `sh script/k400/test_tcp_tsn_r50.sh`
+      e.g.: `sh script/K400/test_TCP_TSN_R50_8f.sh`
+      
+  ## TCP Code
+ 
   
+```
+
+├── ops
+|    ├── TCP
+|    |   ├── TCP_module.py
+|    |   ├── TCP_att_module.py
+|    |   ├── TSA.py
+|    |   └── TCA.py
+|    ├ ...
+├ ...
+```
+
 
   ## Acknowledgement
 
-- We thank [TSM][1] for providing the base basic tool box.
-- We also adopt some parts from [iSQRT][2], [TEA][3] and [Non-local][4] and [S3D][S3D]. 
+- We thank [TSM][1] for providing the basic toolbox.
+- We also refer to some functions from [iSQRT][2], [TEA][3] and [Non-local][4].
+- Mini-K200 dataset samplling strategy follows [Mini_K200][S3D]. 
 - We would like to thank Facebook for developing pytorch toolbox.
 
 Thanks for their work!
@@ -112,4 +144,4 @@ Thanks for their work!
   [5]: https://pytorch.org
   [S3D]: https://github.com/s9xie/Mini-Kinetics-200
   
-  
+  |
