@@ -3,6 +3,9 @@ This is an implementation of [TCPNet][PAPER].
 
 [PAPER]: https://arxiv.com.xxxx
 
+
+![arch](Fig/arch.png)
+
 ## Introduction
 
 For video recognition task, a global representation summarizing the whole contents of the video snippets plays an important role for the final performance. However,
@@ -30,7 +33,7 @@ generalization ability.
   ```
 
 
-  ## Model Zoom
+  ## Model Zoo
   
 
 #### Kinetics-400
@@ -130,7 +133,7 @@ fvcore `pip install 'git+https://github.com/facebookresearch/fvcore'`
 
   ## Acknowledgement
 
-- We thank [TSM][1] for providing the basic toolbox.
+- We thank [TSM][1] for providing well-designed 2D action recognition toolbox.
 - We also refer to some functions from [iSQRT][2], [TEA][3] and [Non-local][4].
 - Mini-K200 dataset samplling strategy follows [Mini_K200][S3D]. 
 - We would like to thank Facebook for developing pytorch toolbox.
@@ -144,4 +147,3 @@ Thanks for their work!
   [5]: https://pytorch.org
   [S3D]: https://github.com/s9xie/Mini-Kinetics-200
   
-  |
