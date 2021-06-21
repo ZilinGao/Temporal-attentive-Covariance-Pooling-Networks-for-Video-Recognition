@@ -10,7 +10,7 @@ We train Kinetics-400 with frame data. Extracted manner evolves from [TSM][1].
 [K-400]: https://deepmind.com/research/open-source/kinetics
 
 ```
-├── train_256
+├── train_256 (/path/to/K400/video/trainset/folder)
 │   ├──class_1
 │   │   ├── video1 (xxx.mp4 / xxx.mkv)
 │   │   ├── video2
@@ -20,7 +20,7 @@ We train Kinetics-400 with frame data. Extracted manner evolves from [TSM][1].
 │   │   ├── video...
 │   │   └── ...
 │   └── class...
-└── val_256
+└── val_256 (/path/to/K400/video/valset/folder)
     ├──class_1
     │   ├── video1
     │   ├── video2
@@ -44,7 +44,7 @@ File `vid2img_kinetics.py` is a modified version  from TSM toolbox, in which hei
 
 The extracted frame data would be organized like:
 ```
-├── train
+├── train (/path/to/K400/frame/trainset/folder)
 │   ├──class_1
 │   │   ├── video1(folder)
 │   │   │      ├──img_00001.jpg
@@ -57,7 +57,7 @@ The extracted frame data would be organized like:
 │   │          ├── ....
 │   │          └── ...
 │   └── class...
-└── val
+└── val (/path/to/K400/frame/valset/folder)
     ├──class_1
     │   └── video1
     │          ├──img_00001.jpg
@@ -113,13 +113,15 @@ A: If you have extracted K-400 frames as above, generate your own Mini-K200 txt 
 
 
 ```
+cd tools/Mini_K200/
+
 #K400_to_K200_labels_as_K400.py inputs:   k400_txt   k200_full_txt   k200_our_txt
-python tools/Mini_K200/K400_to_K200_labels_as_K400.py train.txt tools/Mini_K200/train_ytid_list.txt tools/Mini_K200/train_K200_old_labels.txt
-python tools/Mini_K200/K400_to_K200_labels_as_K400.py val.txt tools/Mini_K200/val_ytid_list.txt tools/Mini_K200/val_K200_old_labels.txt
+python K400_to_K200_labels_as_K400.py train.txt   train_ytid_list.txt  train_K200_old_labels.txt
+python K400_to_K200_labels_as_K400.py val.txt   val_ytid_list.txt   val_K200_old_labels.txt
 
 
-python tools/Mini_K200/reset_K200_labels.py tools/Mini_K200/train_K200_old_labels.txt train_K200.txt
-python tools/Mini_K200/reset_K200_labels.py val_K200_old_labels.txt val_K200.txt
+python   reset_K200_labels.py  train_K200_old_labels.txt  train_K200.txt
+python   reset_K200_labels.py   val_K200_old_labels.txt   val_K200.txt
 
 ```
 
@@ -129,9 +131,14 @@ B: If you don't have K-400 frames data, extract Mini-K200 frames from full K-400
 2. extract the frames needed by Mini-K200 (~430G)
 
 
-`python tools/k400/vid2img_k200.py  /path/to/K400/video/trainset/folder /path/to/K200/frame/trainset/folder  tools/Mini_K200/train_ytid_list.txt`
+```
+cd tools/Mini_K200/
+
+python  vid2img_k200.py  /path/to/K400/video/trainset/folder /path/to/K200/frame/trainset/folder   train_ytid_list.txt
  
-`python tools/k400/vid2img_k200.py  /path/to/K400/video/valset/folder /path/to/K200/frame/valset/folder  tools/Mini_K200/val_ytid_list.txt`
+python  vid2img_k200.py  /path/to/K400/video/valset/folder /path/to/K200/frame/valset/folder   val_ytid_list.txt
+
+```
 
 
 
@@ -148,7 +155,7 @@ TO DO
 
 
 ```
-python tools/merge_train_val.py /path/to/K200/frame/valset/folder /path/to/K200/frame/trainset/folder
+python  merge_train_val.py /path/to/K200/frame/valset/folder /path/to/K200/frame/trainset/folder
 ```
 
 the txt file would be  like:
@@ -165,6 +172,6 @@ finger_snapping/8XysUNy0gLE 360 1
 modified the txt path and dataset root path to `ops/dataset_config.py`
 ```
         root_data = '/path/to/K200/frame/trainset/folder'
-        filename_imglist_train = 'train_K200.txt'
-        filename_imglist_val = 'val_K200.txt'
+        filename_imglist_train = 'tools/Mini_K200/train_K200.txt'
+        filename_imglist_val = 'tools/Mini_K200/val_K200.txt'
 ```
