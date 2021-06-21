@@ -106,10 +106,10 @@ fvcore `pip install 'git+https://github.com/facebookresearch/fvcore'`
 
   ## Dataset Preparation
   
-   TODO
+   We provide a detailed dataset preparation guideline for Kinetics-400 and Mini-Kinetics-200. See [Dataset preparation](Dataset.md).
 
   ## StartUp
-  1. download the pretrained model and put it in `pretrained_model/`
+  1. download the pretrained model and put it in `pretrained_models/`
   2. execute the training script file 
       e.g.: `sh script/K400/train_TCP_TSN_8f_R50.sh`
  3. execute the inference script file 
