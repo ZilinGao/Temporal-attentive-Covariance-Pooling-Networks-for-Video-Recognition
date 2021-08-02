@@ -93,8 +93,10 @@ generalization ability.
   pytorch v1.0+(for TCP_TSN); v1.0~1.4(for TCP+TEA)
   
   ffmpeg
+  
+  graphviz `pip install graphviz`
 
-tensorboard `pip install tensorboard`
+tensorboard `pip install tensorboardX`
 
 tqdm `pip install tqdm`
 
