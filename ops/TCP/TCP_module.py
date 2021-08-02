@@ -79,7 +79,7 @@ class TCP(nn.Module):
                  return 0
              elif isinstance(m, nn.Conv2d):
                  nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-                 print(n + '  layer  kaiming initialed ')
+                 # print(n + '  layer  kaiming initialed ')
                  if hasattr(m, 'bias'):
                      if m.bias is not None:
                          nn.init.zeros_(m.bias)
