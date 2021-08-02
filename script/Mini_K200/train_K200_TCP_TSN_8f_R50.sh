@@ -1,5 +1,5 @@
 python main.py \
-    kinetics RGB --arch resnet50 \
+    mini_kinetics_200 RGB --arch resnet50 \
     --num_segments 8 --gpus 0 1 2 3  --gd 20\
     --lr 0.015 --lr_steps 20 30 --epochs 40 \
     --batch-size 96  -j 8 --dropout 0.5 \
