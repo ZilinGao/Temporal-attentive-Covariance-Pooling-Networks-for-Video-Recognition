@@ -68,7 +68,7 @@ class TCP(nn.Module):
          else :
              # w/o att module, only matrix normalization
              from ops.Identity import Identity as att_module
-             self.TCP_att = Identity()
+             self.TCP_att = att_module()
 
          self.parameter_init()
 
