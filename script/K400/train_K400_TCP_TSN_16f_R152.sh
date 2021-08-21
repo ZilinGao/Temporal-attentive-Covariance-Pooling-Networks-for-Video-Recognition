@@ -7,4 +7,4 @@ python main.py \
     --npb --wd 1e-4\
     --TCP  --lr_x_factor 50\
     --store_name K400_TCP_TSN_16f_R152 \
-    --tune_GCP_from  pretrained_models/ImgeNet11K_1K_preact_R152_GCP.pth.tar
+    --load_GCP_from  pretrained_models/ImgeNet11K_1K_preact_R152_GCP.pth.tar
