@@ -126,7 +126,7 @@ def main():
         model.load_state_dict(model_dict)
 
 
-    if  (not args.keys_old) and [ii for ii in model.state_dict().keys() if 'iSQRT' in ii or 'TCP' in ii]:
+    if  (not args.keys_old) and [ii for ii in model.state_dict().keys() if 'iSQRT' in ii ]:
         args.keys_old = True
 
     if args.resume or args.load_TCP_from: #load trained TCP model
