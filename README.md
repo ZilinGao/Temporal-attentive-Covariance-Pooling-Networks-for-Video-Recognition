@@ -1,7 +1,7 @@
 # Temporal-attentive-Covariance-Pooling-Networks-for-Video-Recognition
-This is an implementation of [TCPNet][PAPER].
+This is an implementation of [TCPNet][PAPER] (NeurIPS 2021).
 
-[PAPER]: https://arxiv.com.xxxx
+[PAPER]: https://arxiv.org/pdf/2110.14381.pdf
 
 
 ![arch](Fig/arch.png)
@@ -24,12 +24,12 @@ generalization ability.
 ## Citation
 
 ```
-@InProceedings{Gao_2021_TCP,
-                author = {Zilin, Gao and Qilong, Wang and Bingbing, Zhang and Qinghua, Hu and Peihua, Li},
-                title = {Temporal-attentive Covariance Pooling Networks for Video Recognition},
-                booktitle = {arxiv preprint axXiv:2021.06xxx},
-                year = {2021}
-  }
+@article{gao2021temporal,
+  title={Temporal-attentive Covariance Pooling Networks for Video Recognition},
+  author={Gao, Zilin and Wang, Qilong and Zhang, Bingbing and Hu, Qinghua and Li, Peihua},
+  journal={NeurIPS},
+  year={2021}
+}
   ```
 
 
