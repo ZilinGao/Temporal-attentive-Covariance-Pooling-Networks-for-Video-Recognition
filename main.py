@@ -140,6 +140,9 @@ def main():
         if args.resume :
             args.start_epoch = checkpoint['epoch']
             best_prec1 = checkpoint['best_prec1']
+        elif  [ii for ii in checkpoint['state_dict'].keys() if 'iSQRT' in ii ]:
+             # load pretrained old keys TCP model
+             args.keys_old = True
 
         if not args.keys_old :
             if args.resume: #not load optimizer for old keys model
@@ -159,9 +162,8 @@ def main():
             model.load_state_dict(model_dict)
         else:
             model.load_state_dict(checkpoint['state_dict'])
-
-        print(("=> loaded checkpoint evaluate:'{}' (epoch {})"
-               .format(args.evaluate, checkpoint['epoch'])))
+            print(("=> loaded checkpoint evaluate:'{}' (epoch {})"
+                   .format(args.evaluate, checkpoint['epoch'])))
 
     if args.temporal_pool and not args.resume:
         make_temporal_pool(model.module.base_model, args.num_segments)
